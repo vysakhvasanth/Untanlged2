@@ -1,0 +1,14 @@
+﻿<Window x:Class="UntangledBackground.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Untangled Beta" Height="350" Width="983">
+    <Grid>
+        <DataGrid x:Name="MonitorView" IsReadOnly="True" IsTextSearchCaseSensitive="True" Margin="0,26,0,0" ColumnWidth="*"  VerticalScrollBarVisibility="Visible" AutoGenerateColumns="False" RowHeaderWidth="10" ColumnHeaderHeight="10" HorizontalScrollBarVisibility="Visible">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Path=name}" ClipboardContentBinding="{x:Null}" Width="250" HeaderStringFormat="ID"/>
+                <DataGridTextColumn Binding="{Binding Path=path}" ClipboardContentBinding="{x:Null}" HeaderStringFormat="Log Data"/>
+            </DataGrid.Columns>
+
+        </DataGrid>
+    </Grid>
+</Window>

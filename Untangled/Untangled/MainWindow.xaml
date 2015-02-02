@@ -1,0 +1,230 @@
+﻿<Window x:Name="UntangledWindow" x:Class="Untangled.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:cc="clr-namespace:CardControlLibrary;assembly=CardControlLibrary"
+        Title="Untangled" Height="575" Width="571" Background="Transparent" WindowStartupLocation="Manual"  
+        MouseDown="UntangledWnd_MouseDown" ScrollViewer.CanContentScroll="True" AllowsTransparency="True" 
+        WindowStyle="None" WindowState="Minimized" Loaded="UntangledWindow_Loaded" Closing="UntangledWindow_Closing" Deactivated="UntangledWindow_Deactivated" Activated="UntangledWindow_Activated" ResizeMode="NoResize">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary 
+                    Source="CustomStyles.xaml">
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid Margin="5" x:Name="MainGrid" Background="#e9e8e8" >
+
+        <!-- Grid styling and slicing -->
+        <Grid.Effect>
+            <DropShadowEffect Color="#FF858585" BlurRadius="12" RenderingBias="Quality" ShadowDepth="2"/>
+        </Grid.Effect>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="73"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+
+        <!--   
+           ScrolViewer contains the main stackpanel which stacks the
+           dynamically created grids from the code. These grids display 
+           the activity information. Styles are applied to grids within the
+           stackpanel resources. This way it will be applied to all grids added
+           to the panel 
+        -->
+        <ScrollViewer x:Name="MainScroller" Grid.Row="1" Grid.Column="1" VerticalScrollBarVisibility="Auto" Height="485" VerticalAlignment="Top">
+            <!-- Stack Panel that holds the dynamically generated grids -->
+            <StackPanel x:Name="StackMain"  ScrollViewer.CanContentScroll="True">
+                <!-- Styling for the dynamic Grids -->
+                <StackPanel.Resources>
+                    <Style TargetType="{x:Type cc:AwesomeCard}">
+                        <Setter Property="Background" Value="#FFECECEC"></Setter>
+                        <Style.Triggers>
+                            <EventTrigger RoutedEvent="Grid.Loaded">
+                                <BeginStoryboard>
+                                    <Storyboard >
+                                        <!-- Gradually animates the width of the grid creating a slide-in effect -->
+                                        <DoubleAnimation Duration="0:0:.2" Storyboard.TargetProperty="Width" From="0" To="495" AccelerationRatio=".6" Timeline.DesiredFrameRate="30"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Style.Triggers>
+                    </Style>
+                    <Style TargetType="TextBox">
+                        <Setter Property="Foreground" Value="Black"></Setter>
+                    </Style>
+                    <Style TargetType="Border">
+                        <Setter Property="Effect" Value="{DynamicResource DropShadow}"/>
+                    </Style>
+                    <DropShadowEffect x:Key="DropShadow" BlurRadius="8" Direction="-90" Color="#E1E2E3" />
+                </StackPanel.Resources>
+            </StackPanel>
+        </ScrollViewer>
+
+        <Grid x:Name ="SettingsViewScroller" Grid.Row="1" Grid.Column="1"  Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="40"></RowDefinition>
+            </Grid.RowDefinitions>
+
+
+            <ScrollViewer x:Name="SettingsViewScrollerG" Style="{StaticResource SettingsStyle}" Grid.Row="0"
+                          Grid.Column="0" VerticalScrollBarVisibility="Auto"  Visibility="Visible">
+                <Grid x:Name="StackSettings" ScrollViewer.CanContentScroll="True" Margin="0,30,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="120"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="40"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"></RowDefinition>
+                        <RowDefinition Height="60"></RowDefinition>
+                        <RowDefinition Height="40"></RowDefinition>
+                        <RowDefinition Height="40*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Column="0" Grid.Row="0" Margin="0,5,0,0" HorizontalContentAlignment="Center">Directory</Label>
+                    <TextBox x:Name="DirectoryName" Grid.Column="1" Grid.Row="0" Text="{Binding Path=MonitoringDirectory}" Margin="0,5,0,10" VerticalAlignment="Bottom"/>
+                    <Button x:Name="BtnFolderSelect" Grid.Column="2" Grid.Row="0" Background="{x:Null}"
+                            BorderBrush="{x:Null}" BorderThickness="0" Width="18" Height="18" VerticalAlignment="Center"
+                            Template="{StaticResource OkButton}"  Click="BtnFolderSelect_Click" />
+
+                    <Label Grid.Column="0" Grid.Row="1" Margin="0,5,0,0" HorizontalContentAlignment="Center">Set Timer</Label>
+                    <Grid Grid.Column="1" Grid.Row="1" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="35"></RowDefinition>
+                            <RowDefinition Height="25"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="60"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Slider x:Name="Timer"  Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" Minimum="0" Maximum="999" IsSnapToTickEnabled="True" TickFrequency="10" Value="{Binding  Path=ClockTime}"></Slider>
+                        <!--<TextBox x:Name="Timer" Grid.Column="1" Grid.Row="1" Text="{Binding Path=ClockTime, Mode=TwoWay}" Margin="0,5,0,10"  Width="60" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>-->
+                        <Label  FontFamily="Consolas" Grid.Column="0" HorizontalAlignment="Right" HorizontalContentAlignment="Right" VerticalAlignment="Top" Margin="0,25,0,0" Grid.RowSpan="2" Content="{Binding Path=ClockTime}"></Label>
+                        <Label  FontFamily="Consolas" Grid.Column="1" HorizontalAlignment="Left" HorizontalContentAlignment="Left" VerticalAlignment="Top" Margin="0,25,0,0" Grid.RowSpan="2">seconds</Label>
+                    </Grid>
+
+                </Grid>
+            </ScrollViewer>
+
+            <Grid Grid.Column="0" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="25"></ColumnDefinition>
+                    <ColumnDefinition Width="40"></ColumnDefinition>
+                    <ColumnDefinition Width="20"></ColumnDefinition>
+                    <ColumnDefinition Width="45"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+
+                </Grid.ColumnDefinitions>
+                <Button x:Name="BtnSubmit" Grid.Column="1" Background="{x:Null}"
+                            BorderBrush="{x:Null}" BorderThickness="0" Width="30" Height="30" HorizontalAlignment="Left"
+                            Template="{StaticResource SubmitButton}" Click="BtnSubmit_Click" />
+                <Label Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center">Save</Label>
+
+                <Button x:Name="BtnCancel" Grid.Column="3" Background="{x:Null}"
+                            BorderBrush="{x:Null}" BorderThickness="0" Width="20" Height="20" HorizontalAlignment="Left"
+                            Template="{StaticResource CancelButton}" Click="BtnCancelSettings_Click" />
+                <Label Grid.Column="4" HorizontalAlignment="Left" VerticalAlignment="Center">Cancel</Label>
+            </Grid>
+        </Grid>
+
+        <ScrollViewer x:Name="LogViewerScroller"  Style="{StaticResource SettingsStyle}" Grid.Row="1" Grid.Column="1"
+                      VerticalScrollBarVisibility="Auto" Visibility="Collapsed">
+            <Grid x:Name="LogGrid" ScrollViewer.CanContentScroll="True" Margin="0,0,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBox x:Name="LoggerBox" Grid.Column="0" Grid.Row="0" Text="Logging:" Margin="0,5,5,10" IsReadOnly="True" />
+                <!--<untangled:AwesomeProgressBar Grid.Row="3" Grid.Column="0"  Height="30" Width="30" Margin="5"
+                     Value="{Binding PctComplete}"
+                     HorizontalAlignment="Center"/>-->
+            </Grid>
+        </ScrollViewer>
+
+
+        <!-- Side bar tools -->
+        <Grid x:Name="SideToolPanel" Grid.Row="1" Grid.Column="0" Width="73" HorizontalAlignment="Left" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40*"></RowDefinition>
+                <RowDefinition Height="35*"></RowDefinition>
+                <RowDefinition Height="35*"></RowDefinition>
+                <RowDefinition Height="35*"></RowDefinition>
+                <RowDefinition Height="100*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="73"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="BtnBack"  Background="{x:Null}" BorderBrush="{x:Null}" ToolTip="Back" Height="26" Style="{StaticResource BackButtonStyle}" BorderThickness="0" Grid.Row="1" Template="{StaticResource BackButton}" Visibility="Collapsed" Click="BtnBack_Click" />
+            <Button x:Name="BtnSettings"  Background="{x:Null}" ToolTip="Settings" BorderBrush="{x:Null}" BorderThickness="0" Grid.Row="2" Height="30" Template="{StaticResource SettingsButton}" Click="BtnSettings_Click"/>
+            <Button x:Name="BtnRules"  Background="{x:Null}" BorderBrush="{x:Null}" ToolTip="View Log" BorderThickness="0" Grid.Row="3" Height="30" Template="{StaticResource RulesButton}" RenderTransformOrigin="0.593,-1.414" Click="BtnRules_Click"/>
+            <!-- Vertical seperator from side bar tools -->
+            <Separator Grid.Column="0" Width="474" Background="#d0cfcf" BorderBrush="#d0cfcf" BorderThickness="1" Style="{StaticResource VerticalSeparatorStyle}"  Grid.Row="0" Grid.RowSpan="5"  />
+        </Grid>
+
+        <!-- Form Controls i.e. clos, minimize, pin -->
+        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="25"></ColumnDefinition>
+                <ColumnDefinition Width="25"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"></RowDefinition>
+                <RowDefinition Height="25"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Button x:Name="BtnClose" Grid.Row="0" Grid.Column="3" Click="_btnClose_Click"   Background="{x:Null}" BorderBrush="{x:Null}" BorderThickness="0" Foreground="#FFE0E0E0" Template="{StaticResource CloseButton}" VerticalAlignment="Center"/>
+            <Button x:Name="BtnMinimise" Grid.Row="0" Grid.Column="2"  Background="{x:Null}" Foreground="#FFE0E0E0" FontSize="14" BorderBrush="{x:Null}" BorderThickness="0"  Click="_btnMinimise_Click" Template="{StaticResource MinimizeButton}" VerticalAlignment="Center"/>
+        </Grid>
+
+        <!-- Notification text Box-->
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock x:Name="TxtDefault" Grid.Column="0" ToolTip="{Binding MonitoringDirectory}" HorizontalAlignment="Center" Grid.Row="1" TextWrapping="Wrap" Width="392" VerticalAlignment="Center" FontSize="20" FontFamily="Consolas" Foreground="#FFA2A0A0" TextAlignment="Center"><Run Language="en-gb" Text="Point me to a folder human!"/></TextBlock>
+        </Grid>
+
+        <!-- Window Footer -->
+        <Grid Grid.Row="2" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="30"></ColumnDefinition>
+                <ColumnDefinition Width="5"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="SearchBox" ToolTip="Search for items. Regex is supported." Template="{StaticResource TextBoxBaseControlTemplate}" Height="22" 
+                     Foreground="#FF646464" Width="170" HorizontalAlignment="Right" 
+                     VerticalAlignment="Center" Padding="5,2,5,2" AutoWordSelection="True" Background="#FFE2E0E0" 
+                     BorderBrush="#FFCBC9C9" FontFamily="Consolas" AllowDrop="False" KeyDown="SearchBox_KeyDown" TextChanged="SearchBox_TextChanged">
+            </TextBox>
+            <Label Grid.Column="0" x:Name="SearchBoxLabel" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="Consolas" Content="Search: " Foreground="#FF6E6D6D"></Label>
+            <Label Grid.Column="1" x:Name="ItemsIndicator" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="Consolas" Content="{Binding ItemsIndicator}" Foreground="#FF6E6D6D"></Label>
+            <Button x:Name="BtnPin"  Grid.Column="2"  Background="{x:Null}" HorizontalAlignment="Right" Foreground="#FFE0E0E0"  BorderBrush="{x:Null}" BorderThickness="0" VerticalAlignment="Center" Width="25"  Click="BtnPinClick" ToolTip="Disable Auto-Hide" Template="{StaticResource PinButton}" Visibility="Hidden"/>
+            <Button x:Name="BtnNoPin"  Grid.Column="2"  Background="{x:Null}" Foreground="#FFE0E0E0"  BorderBrush="{x:Null}" BorderThickness="0" VerticalAlignment="Center" Width="25"  Click="BtnNoPinClick" ToolTip="Enable Auto-Hide" HorizontalAlignment="Right" Template="{StaticResource NoPinButton}" />
+        </Grid>
+        <!-- End of Main grid-->
+    </Grid>
+
+</Window>

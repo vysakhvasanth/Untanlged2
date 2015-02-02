@@ -1,0 +1,11 @@
+C:\Users\vv05\Documents\GitHub\Untangled\Untangled\CardControlLibrary\bin\Release\CardControlLibrary.dll
+C:\Users\vv05\Documents\GitHub\Untangled\Untangled\CardControlLibrary\bin\Release\CardControlLibrary.pdb
+C:\Users\vv05\Documents\GitHub\Untangled\Untangled\CardControlLibrary\obj\Release\GeneratedInternalTypeHelper.g.cs
+C:\Users\vv05\Documents\GitHub\Untangled\Untangled\CardControlLibrary\obj\Release\CardControlLibrary_MarkupCompile.cache
+C:\Users\vv05\Documents\GitHub\Untangled\Untangled\CardControlLibrary\obj\Release\CardControlLibrary_MarkupCompile.lref
+C:\Users\vv05\Documents\GitHub\Untangled\Untangled\CardControlLibrary\obj\Release\Themes\Generic.baml
+C:\Users\vv05\Documents\GitHub\Untangled\Untangled\CardControlLibrary\obj\Release\CardControlLibrary.g.resources
+C:\Users\vv05\Documents\GitHub\Untangled\Untangled\CardControlLibrary\obj\Release\CardControlLibrary.Properties.Resources.resources
+C:\Users\vv05\Documents\GitHub\Untangled\Untangled\CardControlLibrary\obj\Release\CardControlLibrary.csproj.GenerateResource.Cache
+C:\Users\vv05\Documents\GitHub\Untangled\Untangled\CardControlLibrary\obj\Release\CardControlLibrary.dll
+C:\Users\vv05\Documents\GitHub\Untangled\Untangled\CardControlLibrary\obj\Release\CardControlLibrary.pdb

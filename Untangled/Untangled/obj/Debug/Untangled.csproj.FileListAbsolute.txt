@@ -1,0 +1,46 @@
+C:\Users\vv05\Documents\Visual Studio 2012\Projects\Untangled\Untangled\bin\Debug\Untangled.exe.config
+C:\Users\vv05\Documents\Visual Studio 2012\Projects\Untangled\Untangled\bin\Debug\Untangled.exe
+C:\Users\vv05\Documents\Visual Studio 2012\Projects\Untangled\Untangled\bin\Debug\Untangled.pdb
+C:\Users\vv05\Documents\Visual Studio 2012\Projects\Untangled\Untangled\obj\Debug\Untangled.csprojResolveAssemblyReference.cache
+C:\Users\vv05\Documents\Visual Studio 2012\Projects\Untangled\Untangled\obj\Debug\MainWindow.baml
+C:\Users\vv05\Documents\Visual Studio 2012\Projects\Untangled\Untangled\obj\Debug\MainWindow.g.cs
+C:\Users\vv05\Documents\Visual Studio 2012\Projects\Untangled\Untangled\obj\Debug\App.g.cs
+C:\Users\vv05\Documents\Visual Studio 2012\Projects\Untangled\Untangled\obj\Debug\Untangled_MarkupCompile.cache
+C:\Users\vv05\Documents\Visual Studio 2012\Projects\Untangled\Untangled\obj\Debug\Untangled.g.resources
+C:\Users\vv05\Documents\Visual Studio 2012\Projects\Untangled\Untangled\obj\Debug\Untangled.Properties.Resources.resources
+C:\Users\vv05\Documents\Visual Studio 2012\Projects\Untangled\Untangled\obj\Debug\Untangled.csproj.GenerateResource.Cache
+C:\Users\vv05\Documents\Visual Studio 2012\Projects\Untangled\Untangled\obj\Debug\Untangled.exe
+C:\Users\vv05\Documents\Visual Studio 2012\Projects\Untangled\Untangled\obj\Debug\Untangled.pdb
+C:\Users\vysak_000\Documents\Visual Studio 2012\Projects\Untangled\Untangled\bin\Debug\Untangled.exe.config
+C:\Users\vysak_000\Documents\Visual Studio 2012\Projects\Untangled\Untangled\obj\Debug\Untangled.exe
+C:\Users\vysak_000\Documents\Visual Studio 2012\Projects\Untangled\Untangled\obj\Debug\Untangled.pdb
+C:\Users\vysak_000\Documents\Visual Studio 2012\Projects\Untangled\Untangled\bin\Debug\Untangled.exe
+C:\Users\vysak_000\Documents\Visual Studio 2012\Projects\Untangled\Untangled\bin\Debug\Untangled.pdb
+C:\Users\vysak_000\Documents\Visual Studio 2012\Projects\Untangled\Untangled\obj\Debug\Untangled.csprojResolveAssemblyReference.cache
+C:\Users\vysak_000\Documents\Visual Studio 2012\Projects\Untangled\Untangled\obj\Debug\MainWindow.baml
+C:\Users\vysak_000\Documents\Visual Studio 2012\Projects\Untangled\Untangled\obj\Debug\MainWindow.g.cs
+C:\Users\vysak_000\Documents\Visual Studio 2012\Projects\Untangled\Untangled\obj\Debug\App.g.cs
+C:\Users\vysak_000\Documents\Visual Studio 2012\Projects\Untangled\Untangled\obj\Debug\Untangled_MarkupCompile.cache
+C:\Users\vysak_000\Documents\Visual Studio 2012\Projects\Untangled\Untangled\obj\Debug\Untangled.g.resources
+C:\Users\vysak_000\Documents\Visual Studio 2012\Projects\Untangled\Untangled\obj\Debug\Untangled.Properties.Resources.resources
+C:\Users\vysak_000\Documents\Visual Studio 2012\Projects\Untangled\Untangled\obj\Debug\Untangled.csproj.GenerateResource.Cache
+C:\Users\vv05\Documents\Visual Studio 2012\Projects\Untangled\Untangled\obj\Debug\CustomStyles.baml
+C:\Users\vv05\Documents\GitHub\Untangled\Untangled\Untangled\bin\Debug\Untangled.exe.config
+C:\Users\vv05\Documents\GitHub\Untangled\Untangled\Untangled\bin\Debug\Untangled.exe
+C:\Users\vv05\Documents\GitHub\Untangled\Untangled\Untangled\bin\Debug\Untangled.pdb
+C:\Users\vv05\Documents\GitHub\Untangled\Untangled\Untangled\bin\Debug\CardControlLibrary.dll
+C:\Users\vv05\Documents\GitHub\Untangled\Untangled\Untangled\bin\Debug\CardControlLibrary.pdb
+C:\Users\vv05\Documents\GitHub\Untangled\Untangled\Untangled\obj\Debug\Untangled.csprojResolveAssemblyReference.cache
+C:\Users\vv05\Documents\GitHub\Untangled\Untangled\Untangled\obj\Debug\CustomStyles.baml
+C:\Users\vv05\Documents\GitHub\Untangled\Untangled\Untangled\obj\Debug\ElegantMessageBox.baml
+C:\Users\vv05\Documents\GitHub\Untangled\Untangled\Untangled\obj\Debug\MainWindow.baml
+C:\Users\vv05\Documents\GitHub\Untangled\Untangled\Untangled\obj\Debug\App.baml
+C:\Users\vv05\Documents\GitHub\Untangled\Untangled\Untangled\obj\Debug\ElegantMessageBox.g.cs
+C:\Users\vv05\Documents\GitHub\Untangled\Untangled\Untangled\obj\Debug\MainWindow.g.cs
+C:\Users\vv05\Documents\GitHub\Untangled\Untangled\Untangled\obj\Debug\App.g.cs
+C:\Users\vv05\Documents\GitHub\Untangled\Untangled\Untangled\obj\Debug\Untangled_MarkupCompile.cache
+C:\Users\vv05\Documents\GitHub\Untangled\Untangled\Untangled\obj\Debug\Untangled.g.resources
+C:\Users\vv05\Documents\GitHub\Untangled\Untangled\Untangled\obj\Debug\Untangled.Properties.Resources.resources
+C:\Users\vv05\Documents\GitHub\Untangled\Untangled\Untangled\obj\Debug\Untangled.csproj.GenerateResource.Cache
+C:\Users\vv05\Documents\GitHub\Untangled\Untangled\Untangled\obj\Debug\Untangled.exe
+C:\Users\vv05\Documents\GitHub\Untangled\Untangled\Untangled\obj\Debug\Untangled.pdb

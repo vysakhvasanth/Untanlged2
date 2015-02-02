@@ -1,0 +1,12 @@
+C:\Users\vv05\Documents\Visual Studio 2012\Projects\LearningWPF\CardControlLibrary\bin\Debug\CardControlLibrary.dll
+C:\Users\vv05\Documents\Visual Studio 2012\Projects\LearningWPF\CardControlLibrary\bin\Debug\CardControlLibrary.pdb
+C:\Users\vv05\Documents\Visual Studio 2012\Projects\LearningWPF\CardControlLibrary\obj\Debug\CardControlLibrary.csprojResolveAssemblyReference.cache
+C:\Users\vv05\Documents\Visual Studio 2012\Projects\LearningWPF\CardControlLibrary\obj\Debug\CardControlLibrary_MarkupCompile.cache
+C:\Users\vv05\Documents\Visual Studio 2012\Projects\LearningWPF\CardControlLibrary\obj\Debug\CardControlLibrary_MarkupCompile.lref
+C:\Users\vv05\Documents\Visual Studio 2012\Projects\LearningWPF\CardControlLibrary\obj\Debug\Themes\Generic.baml
+C:\Users\vv05\Documents\Visual Studio 2012\Projects\LearningWPF\CardControlLibrary\obj\Debug\CardControlLibrary.g.resources
+C:\Users\vv05\Documents\Visual Studio 2012\Projects\LearningWPF\CardControlLibrary\obj\Debug\CardControlLibrary.Properties.Resources.resources
+C:\Users\vv05\Documents\Visual Studio 2012\Projects\LearningWPF\CardControlLibrary\obj\Debug\CardControlLibrary.csproj.GenerateResource.Cache
+C:\Users\vv05\Documents\Visual Studio 2012\Projects\LearningWPF\CardControlLibrary\obj\Debug\CardControlLibrary.dll
+C:\Users\vv05\Documents\Visual Studio 2012\Projects\LearningWPF\CardControlLibrary\obj\Debug\CardControlLibrary.pdb
+C:\Users\vv05\Documents\Visual Studio 2012\Projects\LearningWPF\CardControlLibrary\obj\Debug\GeneratedInternalTypeHelper.g.cs

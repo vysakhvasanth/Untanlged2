@@ -1,0 +1,15 @@
+C:\Users\vv05\Documents\Visual Studio 2012\Projects\LearningWPF\LearningWPF\bin\Debug\LearningWPF.exe.config
+C:\Users\vv05\Documents\Visual Studio 2012\Projects\LearningWPF\LearningWPF\obj\Debug\LearningWPF.exe
+C:\Users\vv05\Documents\Visual Studio 2012\Projects\LearningWPF\LearningWPF\obj\Debug\LearningWPF.pdb
+C:\Users\vv05\Documents\Visual Studio 2012\Projects\LearningWPF\LearningWPF\bin\Debug\LearningWPF.exe
+C:\Users\vv05\Documents\Visual Studio 2012\Projects\LearningWPF\LearningWPF\bin\Debug\LearningWPF.pdb
+C:\Users\vv05\Documents\Visual Studio 2012\Projects\LearningWPF\LearningWPF\bin\Debug\CardControlLibrary.dll
+C:\Users\vv05\Documents\Visual Studio 2012\Projects\LearningWPF\LearningWPF\bin\Debug\CardControlLibrary.pdb
+C:\Users\vv05\Documents\Visual Studio 2012\Projects\LearningWPF\LearningWPF\obj\Debug\CardControlTest.csprojResolveAssemblyReference.cache
+C:\Users\vv05\Documents\Visual Studio 2012\Projects\LearningWPF\LearningWPF\obj\Debug\MainWindow.baml
+C:\Users\vv05\Documents\Visual Studio 2012\Projects\LearningWPF\LearningWPF\obj\Debug\MainWindow.g.cs
+C:\Users\vv05\Documents\Visual Studio 2012\Projects\LearningWPF\LearningWPF\obj\Debug\App.g.cs
+C:\Users\vv05\Documents\Visual Studio 2012\Projects\LearningWPF\LearningWPF\obj\Debug\LearningWPF_MarkupCompile.cache
+C:\Users\vv05\Documents\Visual Studio 2012\Projects\LearningWPF\LearningWPF\obj\Debug\LearningWPF.g.resources
+C:\Users\vv05\Documents\Visual Studio 2012\Projects\LearningWPF\LearningWPF\obj\Debug\LearningWPF.Properties.Resources.resources
+C:\Users\vv05\Documents\Visual Studio 2012\Projects\LearningWPF\LearningWPF\obj\Debug\CardControlTest.csproj.GenerateResource.Cache
