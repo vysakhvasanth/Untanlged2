@@ -16,11 +16,13 @@ namespace Untangled
         private Window owner;
         private MessageType messageType;
         private DispatcherTimer timer;
+        private int Time;
 
-        public ElegantMessageBox(Window owner, string text, MessageType messageType)
+        public ElegantMessageBox(Window owner, string text, MessageType messageType, int Time)
         { 
             InitializeComponent();
             this.owner = owner;
+            this.Time = Time;
             this.messageType = messageType;
             DataContext = new Data() { Message = text };
             SetWindowProperties();
@@ -40,7 +42,7 @@ namespace Untangled
                 case MessageType.Notify:
                     timer = new DispatcherTimer()
                     {
-                        Interval = new TimeSpan(0,0,0,2,500)
+                        Interval = new TimeSpan(0, 0, 0, 0, Time)
                     };
                     timer.Tick += timer_Tick;
                     timer.Start();
@@ -55,7 +57,7 @@ namespace Untangled
                 case MessageType.Warning:
                     timer = new DispatcherTimer()
                     {
-                        Interval = new TimeSpan(0,0,0,4,500)
+                        Interval = new TimeSpan(0,0,0,0,Time)
                     };
                     timer.Tick += timer_Tick;
                     timer.Start();
@@ -65,7 +67,7 @@ namespace Untangled
                     Wrapper.BorderThickness = new Thickness(1);
                     Wrapper.BorderBrush = new SolidColorBrush((Color) ColorConverter.ConvertFromString("#C28617"));
                     MessageTxt.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#2E2E2E"));
-                    ShowDialog();
+                    Show();
                     break;
                 case MessageType.Critical:
                     Wrapper.Background = new SolidColorBrush((Color) ColorConverter.ConvertFromString("#E02B2B"));

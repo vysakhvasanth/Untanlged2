@@ -87,14 +87,14 @@
                                 </Grid>
                             </StackPanel>
                             <Rectangle Grid.Column="0" Width="90" Fill="#E6E3E3"></Rectangle>
-                            <Image  Grid.Column="0" Width="27" Height="32" Source="{Binding Path=IconImage}"></Image>
+                            <Image x:Name="ImageIcon" Grid.Column="0" Width="40" Height="40" Source="{Binding Path=IconImage}"></Image>
                             <Grid x:Name="FullProgress" Grid.Column="2">
                                 <Ellipse x:Name="TimerEllipse" Width="40" Height="40"
                                          HorizontalAlignment="Center" Fill="{Binding Path=EllipseFill}"></Ellipse>
                                 <TextBlock x:Name="ProgressValue" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Consolas" Foreground="#FFFFFF" FontWeight="ExtraLight" FontSize="11" Text="{Binding Path=ProgressIndicator}"></TextBlock>
                                 <cc:AwesomeProgressBar x:Name="AwesomeBar" Stroke="{Binding Path=StrokeBrush}" Tag="{Binding RelativeSource={RelativeSource AncestorType={x:Type cc:AwesomeCard}}}" Width="55" Height="55"  Grid.Column="2" Value="{Binding Path=Progress, Mode=TwoWay}" HorizontalAlignment="Center"></cc:AwesomeProgressBar>
-                                <Button x:Name="PauseButton" Width="20" Height="20" Template="{StaticResource PauseButton}" Visibility="Collapsed" HorizontalAlignment="Center">.</Button>
-                                <Button x:Name="PlayButton" Width="20" Height="20" Template="{StaticResource PlayButton}" Visibility="Collapsed" HorizontalAlignment="Center">+</Button>
+                                <Button x:Name="PauseButton" Width="20" Height="20" Template="{StaticResource PauseButton}" Visibility="Collapsed" HorizontalAlignment="Center"></Button>
+                                <Button x:Name="PlayButton" Width="20" Height="20" Template="{StaticResource PlayButton}" Visibility="Collapsed" HorizontalAlignment="Center"></Button>
                             </Grid>
                         </Grid>
                     </Border>

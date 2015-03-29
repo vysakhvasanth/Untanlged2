@@ -15,7 +15,8 @@ namespace CardControlLibrary
         private FileType filetype;
         private string filetypelabel;
         public double Time { get;set; }
-        public static string[] TypeOfFile = { "pack://application:,,,/CardControlLibrary;component/Icons/fileicon.png", "pack://application:,,,/CardControlLibrary;component/Icons/directoryicon.png" };
+        public  string[] TypeOfFile = { "pack://application:,,,/CardControlLibrary;component/Icons/fileicon.png", "pack://application:,,,/CardControlLibrary;component/Icons/directoryicon.png", 
+                                                "pack://application:,,,/CardControlLibrary;component/Icons/tickicon.png" };
 
         public CardProperties()
         {

@@ -1,7 +1,9 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Security.Cryptography.X509Certificates;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 
@@ -12,13 +14,60 @@ namespace CardControlLibrary
         public Guid _unqId;
         public int _elementId;
         public string _assocFilePath { get; set; }
+        public string _filename { get; set; }
         public CardProperties CardProperties { get; set; }
-        public DispatcherTimer timer { get; set; }
+        public DispatcherTimer Timer { get; set; }
         public State CurrentState { get; set; }
         public Disposible CurrentDisposibleState { get; set; }
         public FileType _fileType { get; set; }
         public event EventHandler TimerFinished;
+        public event EventHandler Selected;
+        public event EventHandler ControlStateChanged;
         public ControlState controlState = ControlState.Pause;
+       
+
+
+        private Border theBorder;
+        protected Border TheBorder
+        {
+            get { return theBorder; }
+            set
+            {
+                if (theBorder != null)
+                {
+                    
+                }
+
+                theBorder = value;
+
+                if (theBorder != null)
+                {
+                   
+                }
+            }
+        }
+
+        private Image imageIcon;
+        protected Image ImageIcon
+        {
+            get { return imageIcon; }
+            set
+            {
+                if (imageIcon != null)
+                {
+                    imageIcon.MouseLeftButtonDown -= imageIcon_MouseLeftButtonDown;
+                    imageIcon.MouseLeftButtonUp -= imageIcon_MouseLeftButtonUp;
+                }
+
+                imageIcon = value;
+
+                if (imageIcon != null)
+                {
+                    imageIcon.MouseLeftButtonDown += imageIcon_MouseLeftButtonDown;
+                    imageIcon.MouseLeftButtonUp += imageIcon_MouseLeftButtonUp;
+                }
+            }
+        }
 
 
         private Grid fullGrid;
@@ -51,7 +100,7 @@ namespace CardControlLibrary
         }
 
         private Button pauseButton;
-        protected Button PauseButton
+        public Button PauseButton
         {
             get { return pauseButton; }
             set
@@ -68,7 +117,7 @@ namespace CardControlLibrary
         }
 
         private Button playButton;
-        protected Button PlayButton
+        public Button PlayButton
         {
             get { return playButton; }
             set
@@ -115,6 +164,12 @@ namespace CardControlLibrary
             CurrentDisposibleState = Disposible.NoMan;
             _unqId = Guid.NewGuid();
             _fileType = FileType.File;
+            this.ControlStateChanged += AwesomeCard_ControlStateChanged;
+        }
+
+        void AwesomeCard_ControlStateChanged(object sender, EventArgs e)
+        {
+            
         }
 
         public override void OnApplyTemplate()
@@ -123,13 +178,14 @@ namespace CardControlLibrary
 
             // fetching the controls form the template
             // TODO: this is not a good MVVM practice, improve it with view-model
-
             AwesomeProgress = GetTemplateChild("AwesomeBar") as AwesomeProgressBar;
             PauseButton = GetTemplateChild("PauseButton") as Button;
             PlayButton = GetTemplateChild("PlayButton") as Button;
             ProgressIndicator = GetTemplateChild("ProgressValue") as TextBlock;
             Ellipse = GetTemplateChild("TimerEllipse") as Ellipse;
             FullGrid = GetTemplateChild("FullProgress") as Grid;
+            TheBorder = GetTemplateChild("TheBorder") as Border;
+            ImageIcon = GetTemplateChild("ImageIcon") as Image;
         }
 
         void fullGrid_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
@@ -146,7 +202,6 @@ namespace CardControlLibrary
                     PlayButton.Visibility = Visibility.Hidden;
                     ProgressIndicator.Visibility = Visibility.Hidden;
                     break;
-
             }
         }
 
@@ -167,9 +222,29 @@ namespace CardControlLibrary
             }
         }
 
+        void imageIcon_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (CurrentState == State.Normal)
+            {
+                CurrentState = State.NormalSelected;
+                Selected(this, new EventArgs());
+            }
+            else
+            {
+                CurrentState = State.Normal;
+                Selected(this, new EventArgs());
+            }
+        }
+
+        void imageIcon_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+           //
+        }
+
         void pauseButton_Click(object sender, RoutedEventArgs e)
         {
-            timer.Stop();
+            Timer.Stop();
+            ProgressIndicator.Visibility = Visibility.Hidden;
             PauseButton.Visibility = Visibility.Collapsed;
             PlayButton.Visibility = Visibility.Visible;
             controlState = ControlState.Play;
@@ -178,7 +253,8 @@ namespace CardControlLibrary
 
         void playButton_Click(object sender, RoutedEventArgs e)
         {
-            timer.Start();
+            Timer.Start();
+            ProgressIndicator.Visibility = Visibility.Hidden;
             PlayButton.Visibility = Visibility.Collapsed;
             PauseButton.Visibility = Visibility.Visible;
             controlState = ControlState.Pause;
@@ -201,10 +277,10 @@ namespace CardControlLibrary
             ElapsedTime = CurrentTime = CardProperties.Time = secTime; //setting secTime parameters to default
             SetTimeUnit(secTime); //set and display secTime appropriately
 
-            timer = new DispatcherTimer(DispatcherPriority.Render); //setup and start timer
-            timer.Tick += timer_Tick;
-            timer.Interval = timer.Interval = new TimeSpan(0, 0, 0, 0, 500);
-            timer.Start();
+            Timer = new DispatcherTimer(DispatcherPriority.Render); //setup and start timer
+            Timer.Tick += timer_Tick;
+            Timer.Interval = Timer.Interval = new TimeSpan(0, 0, 0, 0, 500);
+            Timer.Start();
         }
 
         private void timer_Tick(object sender, EventArgs e)
@@ -219,7 +295,7 @@ namespace CardControlLibrary
             if (CardProperties.Progress <= 0.0 || CurrentTime < 0.0)
             {
                 TimerFinished(this, new EventArgs());
-                timer.Stop();
+                Timer.Stop();
             }
         }
 

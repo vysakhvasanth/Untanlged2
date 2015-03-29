@@ -4,7 +4,7 @@
         xmlns:cc="clr-namespace:CardControlLibrary;assembly=CardControlLibrary"
         Title="Untangled" Height="575" Width="571" Background="Transparent" WindowStartupLocation="Manual"  
         MouseDown="UntangledWnd_MouseDown" ScrollViewer.CanContentScroll="True" AllowsTransparency="True" 
-        WindowStyle="None" WindowState="Minimized" Loaded="UntangledWindow_Loaded" Closing="UntangledWindow_Closing" Deactivated="UntangledWindow_Deactivated" Activated="UntangledWindow_Activated" ResizeMode="NoResize">
+        WindowStyle="None" WindowState="Minimized" Loaded="UntangledWindow_Loaded" Closing="UntangledWindow_Closing" Deactivated="UntangledWindow_Deactivated" Activated="UntangledWindow_Activated" ResizeMode="NoResize" Icon="Images/icon.ico">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -146,9 +146,11 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="30"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <TextBox x:Name="LoggerBox" Grid.Column="0" Grid.Row="0" Text="Logging:" Margin="0,5,5,10" IsReadOnly="True" />
+                <Label Grid.Column="0" Grid.Row="0" Background="{x:Null}"> Logger:</Label>
+                <TextBox x:Name="LoggerBox" Grid.Column="0" Grid.Row="1" IsReadOnly="True" Background="#FF292929" CaretBrush="White" Foreground="White" HorizontalScrollBarVisibility="Disabled" />
                 <!--<untangled:AwesomeProgressBar Grid.Row="3" Grid.Column="0"  Height="30" Width="30" Margin="5"
                      Value="{Binding PctComplete}"
                      HorizontalAlignment="Center"/>-->
@@ -163,6 +165,7 @@
                 <RowDefinition Height="35*"></RowDefinition>
                 <RowDefinition Height="35*"></RowDefinition>
                 <RowDefinition Height="35*"></RowDefinition>
+                <RowDefinition Height="35*"></RowDefinition>
                 <RowDefinition Height="100*"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -172,6 +175,8 @@
             <Button x:Name="BtnBack"  Background="{x:Null}" BorderBrush="{x:Null}" ToolTip="Back" Height="26" Style="{StaticResource BackButtonStyle}" BorderThickness="0" Grid.Row="1" Template="{StaticResource BackButton}" Visibility="Collapsed" Click="BtnBack_Click" />
             <Button x:Name="BtnSettings"  Background="{x:Null}" ToolTip="Settings" BorderBrush="{x:Null}" BorderThickness="0" Grid.Row="2" Height="30" Template="{StaticResource SettingsButton}" Click="BtnSettings_Click"/>
             <Button x:Name="BtnRules"  Background="{x:Null}" BorderBrush="{x:Null}" ToolTip="View Log" BorderThickness="0" Grid.Row="3" Height="30" Template="{StaticResource RulesButton}" RenderTransformOrigin="0.593,-1.414" Click="BtnRules_Click"/>
+            <Button x:Name="Btnselect"  Background="{x:Null}" BorderBrush="{x:Null}" ToolTip="Select All" BorderThickness="0" Grid.Row="4" Height="30" Template="{StaticResource SelectButton}" RenderTransformOrigin="0.593,-1.414" Click="SelectBtn_Click"/>
+            <Button x:Name="BtnUnselect"  Background="{x:Null}" BorderBrush="{x:Null}" ToolTip="Select All" BorderThickness="0" Grid.Row="4" Height="30" Template="{StaticResource UnSelectButton}" RenderTransformOrigin="0.593,-1.414" Click="UnSelectBtn_Click" Visibility="Collapsed"/>
             <!-- Vertical seperator from side bar tools -->
             <Separator Grid.Column="0" Width="474" Background="#d0cfcf" BorderBrush="#d0cfcf" BorderThickness="1" Style="{StaticResource VerticalSeparatorStyle}"  Grid.Row="0" Grid.RowSpan="5"  />
         </Grid>
@@ -191,6 +196,7 @@
             </Grid.RowDefinitions>
             <Button x:Name="BtnClose" Grid.Row="0" Grid.Column="3" Click="_btnClose_Click"   Background="{x:Null}" BorderBrush="{x:Null}" BorderThickness="0" Foreground="#FFE0E0E0" Template="{StaticResource CloseButton}" VerticalAlignment="Center"/>
             <Button x:Name="BtnMinimise" Grid.Row="0" Grid.Column="2"  Background="{x:Null}" Foreground="#FFE0E0E0" FontSize="14" BorderBrush="{x:Null}" BorderThickness="0"  Click="_btnMinimise_Click" Template="{StaticResource MinimizeButton}" VerticalAlignment="Center"/>
+            <Image Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Left" Margin="15,3,0,0" Width="32" Height="32" Source="Images/logo.png"></Image>
         </Grid>
 
         <!-- Notification text Box-->
@@ -223,6 +229,23 @@
             <Label Grid.Column="1" x:Name="ItemsIndicator" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="Consolas" Content="{Binding ItemsIndicator}" Foreground="#FF6E6D6D"></Label>
             <Button x:Name="BtnPin"  Grid.Column="2"  Background="{x:Null}" HorizontalAlignment="Right" Foreground="#FFE0E0E0"  BorderBrush="{x:Null}" BorderThickness="0" VerticalAlignment="Center" Width="25"  Click="BtnPinClick" ToolTip="Disable Auto-Hide" Template="{StaticResource PinButton}" Visibility="Hidden"/>
             <Button x:Name="BtnNoPin"  Grid.Column="2"  Background="{x:Null}" Foreground="#FFE0E0E0"  BorderBrush="{x:Null}" BorderThickness="0" VerticalAlignment="Center" Width="25"  Click="BtnNoPinClick" ToolTip="Enable Auto-Hide" HorizontalAlignment="Right" Template="{StaticResource NoPinButton}" />
+
+            <Grid x:Name="MultiFunctions"  Grid.Column="1" HorizontalAlignment="Right" Width="227"  Visibility="Collapsed">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10"></ColumnDefinition>
+                    <ColumnDefinition Width="22"></ColumnDefinition>
+                    <ColumnDefinition Width="3"></ColumnDefinition>
+                    <ColumnDefinition Width="22"></ColumnDefinition>
+                    <ColumnDefinition Width="3"></ColumnDefinition>
+                    <ColumnDefinition Width="22"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="TimerStopBtn" Grid.Column="1"  Template="{StaticResource TimerStop}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="16"  Click="TimerStopBtn_Click" ToolTip="Stop selected card timer(s)"></Button>
+                <Button x:Name="TimerStartBtn" Grid.Column="1"  Template="{StaticResource TimerStart}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="16"  Click="TimerStartBtn_Click" ToolTip="Start selected card timer(s)" Visibility="Collapsed"></Button>
+                <Separator Grid.Column="2" VerticalAlignment="Center" HorizontalContentAlignment="Right" Width="15"  Background="#5e5e5e" BorderBrush="#bbbbbb" BorderThickness="1" Style="{StaticResource VerticalSeparatorStyle}" />
+                <Button x:Name="CancelSelectionBtn" Grid.Column="3" Template="{StaticResource RemoveButton}" Height="15"  HorizontalAlignment="Center" Width="15" Click="RemoveCard_Click" ToolTip="Remove selected card(s)"/>
+                <Separator Grid.Column="4" VerticalAlignment="Center" HorizontalContentAlignment="Right" Width="15"  Background="#5e5e5e" BorderBrush="#bbbbbb" BorderThickness="1" Style="{StaticResource VerticalSeparatorStyle}" />
+                <Button x:Name="DeleteBtn" Grid.Column="5"  Template="{StaticResource Delete}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="16"  Click="DeleteCard_Click" ToolTip="Delete selected item(s)"></Button>
+            </Grid>
         </Grid>
         <!-- End of Main grid-->
     </Grid>

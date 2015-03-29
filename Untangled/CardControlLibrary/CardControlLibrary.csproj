@@ -83,6 +83,7 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Icons\directoryicon.png" />
     <Resource Include="Icons\fileicon.png" />
     <Resource Include="Icons\pause_btn.png" />
     <Resource Include="Icons\pause_hover.png" />
@@ -90,7 +91,7 @@
     <Resource Include="Icons\play_btn_hover.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Icons\directoryicon.png" />
+    <Resource Include="Icons\tickicon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

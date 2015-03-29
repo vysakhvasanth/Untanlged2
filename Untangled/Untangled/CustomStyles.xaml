@@ -386,11 +386,15 @@
         <Grid>
             <Image x:Name="Normal" Source="Images/settings.png"/>
             <Image x:Name="Hover" Source="Images/settings_hover.png" Visibility="Hidden"/>
+            <Image x:Name="Disabled" Source="Images/settings_disabled.png" Visibility="Hidden"/>
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter TargetName="Normal" Property="Visibility" Value="Hidden"/>
                 <Setter TargetName="Hover" Property="Visibility" Value="Visible"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter TargetName="Disabled" Property="Visibility" Value="Visible"></Setter>
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -402,6 +406,42 @@
         <Grid>
             <Image x:Name="Normal" Source="Images/rules.png"/>
             <Image x:Name="Hover" Source="Images/rules_hover.png" Visibility="Hidden"/>
+            <Image x:Name="Disabled" Source="Images/rules_hover_disabled.png" Visibility="Hidden"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="Normal" Property="Visibility" Value="Hidden"/>
+                <Setter TargetName="Hover" Property="Visibility" Value="Visible"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter TargetName="Disabled" Property="Visibility" Value="Visible"></Setter>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <!--
+        Side Bar: Select Button
+    -->
+    <ControlTemplate x:Key="SelectButton" TargetType="{x:Type Button}">
+        <Grid>
+            <Image x:Name="Normal" Source="Images/select_all.png"/>
+            <Image x:Name="Hover" Source="Images/select_all_hover.png" Visibility="Hidden"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="Normal" Property="Visibility" Value="Hidden"/>
+                <Setter TargetName="Hover" Property="Visibility" Value="Visible"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <!--
+        Side Bar: UnSelect Button
+    -->
+    <ControlTemplate x:Key="UnSelectButton" TargetType="{x:Type Button}">
+        <Grid>
+            <Image x:Name="Normal" Source="Images/unselect_all.png"/>
+            <Image x:Name="Hover" Source="Images/unselect_all_hover.png" Visibility="Hidden"/>
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
@@ -529,6 +569,29 @@
 
     <ControlTemplate x:Key="PinButton" TargetType="{x:Type Button}">
         <Grid>
+            <Image x:Name="Normal" Source="Images/pin.png"/>
+            <Image x:Name="Hover" Source="Images/pin.png" Visibility="Hidden"/>
+            <Image x:Name="Pressed" Source="Images/pin.png" Visibility="Hidden"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter TargetName="Normal" Property="Visibility" Value="Hidden"/>
+                <Setter TargetName="Pressed" Property="Visibility" Value="Visible"/>
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="Normal" Property="Visibility" Value="Hidden"/>
+                <Setter TargetName="Hover" Property="Visibility" Value="Visible"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+
+    <!--
+        Side Bar: No Pin Button
+    -->
+
+    <ControlTemplate x:Key="NoPinButton" TargetType="{x:Type Button}">
+        <Grid>
             <Image x:Name="Normal" Source="Images/no_pin.png"/>
             <Image x:Name="Hover" Source="Images/no_pin.png" Visibility="Hidden"/>
             <Image x:Name="Pressed" Source="Images/no_pin.png" Visibility="Hidden"/>
@@ -545,27 +608,81 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
+
+
+
     <!--
-        Side Bar: No Pin Button
+       MultiFunctionsBar: Remove Button
     -->
 
-    <ControlTemplate x:Key="NoPinButton" TargetType="{x:Type Button}">
+    <ControlTemplate x:Key="RemoveButton" TargetType="{x:Type Button}">
         <Grid>
-            <Image x:Name="Normal" Source="Images/pin.png"/>
-            <Image x:Name="Hover" Source="Images/pin.png" Visibility="Hidden"/>
-            <Image x:Name="Pressed" Source="Images/pin.png" Visibility="Hidden"/>
+            <Image x:Name="Normal" Source="Images/remove_card.png"/>
+            <Image x:Name="Hover" Source="Images/remove_card_hover.png" Visibility="Hidden"/>
         </Grid>
         <ControlTemplate.Triggers>
-            <Trigger Property="IsPressed" Value="True">
-                <Setter TargetName="Normal" Property="Visibility" Value="Hidden"/>
-                <Setter TargetName="Pressed" Property="Visibility" Value="Visible"/>
-            </Trigger>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter TargetName="Normal" Property="Visibility" Value="Hidden"/>
                 <Setter TargetName="Hover" Property="Visibility" Value="Visible"/>
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
+
+
+    <!--
+       MultiFunctionsBar: TimerStop Button
+    -->
+
+    <ControlTemplate x:Key="TimerStop" TargetType="{x:Type Button}">
+        <Grid>
+            <Image x:Name="Normal" Source="Images/stop_clock.png"/>
+            <Image x:Name="Hover" Source="Images/stop_clock_hover.png" Visibility="Hidden"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="Normal" Property="Visibility" Value="Hidden"/>
+                <Setter TargetName="Hover" Property="Visibility" Value="Visible"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+
+    <!--
+       MultiFunctionsBar: TimerStart Button
+    -->
+
+    <ControlTemplate x:Key="TimerStart" TargetType="{x:Type Button}">
+        <Grid>
+            <Image x:Name="Normal" Source="Images/start_clock.png"/>
+            <Image x:Name="Hover" Source="Images/start_clock_hover.png" Visibility="Hidden"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="Normal" Property="Visibility" Value="Hidden"/>
+                <Setter TargetName="Hover" Property="Visibility" Value="Visible"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+
+    <!--
+       MultiFunctionsBar: Delete Button
+    -->
+
+    <ControlTemplate x:Key="Delete" TargetType="{x:Type Button}">
+        <Grid>
+            <Image x:Name="Normal" Source="Images/delete_card.png"/>
+            <Image x:Name="Hover" Source="Images/delete_card_hover.png" Visibility="Hidden"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="Normal" Property="Visibility" Value="Hidden"/>
+                <Setter TargetName="Hover" Property="Visibility" Value="Visible"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+
 
 
     <!--
@@ -589,6 +706,9 @@
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
+    
+    
+    
 
     <!--
         Side Bar: Change Properties

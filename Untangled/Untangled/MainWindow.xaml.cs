@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
+using System.Windows.Automation.Peers;
+using System.Windows.Automation.Provider;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
@@ -74,7 +78,7 @@ namespace Untangled
             }
             catch (Exception ex)
             {
-                DisplayAwesomeMessage(this,ex.Message+ex.StackTrace+ex.TargetSite.ToString(),MessageType.Critical);
+                DisplayAwesomeMessage(this,ex.Message+ex.StackTrace+ex.TargetSite.ToString(),MessageType.Critical,0);
             }
 
             if (_notifyIcon != null) //display form on icon click
@@ -111,7 +115,7 @@ namespace Untangled
                 }
                 catch (Exception ex)
                 {
-                    DisplayAwesomeMessage(this,ex.Message,MessageType.Critical);
+                    DisplayAwesomeMessage(this,ex.Message,MessageType.Critical,0);
                 }
             }
             else
@@ -123,7 +127,7 @@ namespace Untangled
                     if (string.IsNullOrEmpty(savedConfiguration.FolderPath))
                     {
                         Show();
-                        DisplayAwesomeMessage(this, "No directory path set in configuration file. Set one lazy!", MessageType.Warning);
+                        DisplayAwesomeMessage(this, "No directory path set in configuration file. Set one lazy!", MessageType.Warning,2000);
                         HandleDirectoryNotSet(false);
                     }
                     else
@@ -141,7 +145,7 @@ namespace Untangled
                 }
                 catch (Exception ex)
                 {
-                   DisplayAwesomeMessage(this,ex.Message, MessageType.Critical);
+                   DisplayAwesomeMessage(this,ex.Message, MessageType.Critical,0);
                    HandleDirectoryNotSet(true);
                 }
             }
@@ -171,10 +175,11 @@ namespace Untangled
             }
             TxtDefault.Text = "You are watching" + Environment.NewLine + "\"" + Path.GetFileName(_watchFolder) + "\"";
             var acm = new ActivityMonitor(this, folder,GeneralSettings.ClockTime);
+            acm.StackMainEmpty += AcmStackMainEmpty;
             _acm = acm;
             acm.StartMonitor();
         }
-
+      
         /// <summary>
         /// 
         /// </summary>
@@ -219,7 +224,7 @@ namespace Untangled
             SetViewState(ViewState.Settings);
             if (isShow)Show();
             WindowState = WindowState.Normal;
-            DisplayAwesomeMessage(this, "You have to set a folder to watch!", MessageType.Warning);
+            DisplayAwesomeMessage(this, "You have to set a folder to watch!", MessageType.Warning,2000);
             TxtDefault.Text = ToolBox.Nofolderset;
         }
 
@@ -234,9 +239,9 @@ namespace Untangled
             }
         }
 
-        public void DisplayAwesomeMessage(Window owner, string text, MessageType messageType)
+        public void DisplayAwesomeMessage(Window owner, string text, MessageType messageType, int Time)
         {
-            new ElegantMessageBox(owner, text, messageType);
+            new ElegantMessageBox(owner, text, messageType, Time);
         }
 
 
@@ -268,6 +273,19 @@ namespace Untangled
         {
             WindowState = WindowState.Minimized;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AcmStackMainEmpty(object sender, EventArgs e)
+        {
+            BtnSettings.IsEnabled = true;
+            MultiFunctions.Visibility = Visibility.Collapsed;
+            TxtDefault.Visibility = Visibility.Visible;
+        }
+
 
         //display settings grid on the stack panel
         //display back button on the sidebar (navigation)
@@ -316,7 +334,7 @@ namespace Untangled
             }
             catch (Exception ex)
             {
-                DisplayAwesomeMessage(this, ex.Message+ex.StackTrace.ToString(), MessageType.Critical);
+                DisplayAwesomeMessage(this, ex.Message+ex.StackTrace.ToString(), MessageType.Critical,0);
             }
         }
 
@@ -327,7 +345,7 @@ namespace Untangled
             DirectoryName.IsEnabled = false; //only enable once you click folder choose button
             if (string.IsNullOrEmpty(DirectoryName.Text) || !Directory.Exists(DirectoryName.Text))
             {
-                DisplayAwesomeMessage(this, "You have to set a valid path!", MessageType.Warning);
+                DisplayAwesomeMessage(this, "You have to set a valid path!", MessageType.Warning,2000);
             }
             else
             {
@@ -340,7 +358,7 @@ namespace Untangled
 
                 //serialise to xml file
                 ToolBox.Serialize(cfl, Configfile);
-                DisplayAwesomeMessage(this, "Settings saved!", MessageType.Notify);
+                DisplayAwesomeMessage(this, "Settings saved!", MessageType.Notify,1200);
                 CommenceMonitoring(_watchFolder);
             }
         }
@@ -398,7 +416,7 @@ namespace Untangled
             }
 
             if (e.Key != Key.Return || StackMain.Children.Count == 0 || string.IsNullOrEmpty(SearchBox.Text)) return;
-            DisplayAwesomeMessage(this, "Showing search results...",MessageType.Notify);
+            DisplayAwesomeMessage(this, "Showing search results...",MessageType.Notify,1200);
 
             try
             {
@@ -407,16 +425,16 @@ namespace Untangled
             }
             catch (Exception ex)
             {
-                DisplayAwesomeMessage(this, "Invalid regular expression", MessageType.Warning);
+                DisplayAwesomeMessage(this, "Invalid regular expression", MessageType.Warning,2000);
             }
 
         }
 
         private void FilterCards(Regex regex)
         {
-            int results = 0;
+            var results = 0;
 
-            for (int i = 0; i < StackMain.Children.Count; i++)
+            for (var i = 0; i < StackMain.Children.Count; i++)
             {
                 var card = StackMain.Children[i] as AwesomeCard;
                 if (card == null) continue;
@@ -438,38 +456,130 @@ namespace Untangled
 
         private void SearchBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
-            if (string.IsNullOrEmpty(SearchBox.Text))
+            if (!string.IsNullOrEmpty(SearchBox.Text))
+                return;
+            SearchBox.Clear();
+            GeneralSettings.ItemsCount = StackMain.Children.Count;
+            FilterCards(new Regex(".*"));
+        }
+
+        private void TimerStopBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (ToolBox.SelectedCardCollection.Count == 0)
+                return;
+
+            var carditems = new List<AwesomeCard>();
+            foreach (var card in ToolBox.SelectedCardCollection.Select(item => item.Value))
             {
-                SearchBox.Clear();
-                GeneralSettings.ItemsCount = StackMain.Children.Count;
-                FilterCards(new Regex(".*"));
+               carditems.Add(card);
+                var peer = new ButtonAutomationPeer(card.PauseButton);
+                var invprovide = peer.GetPattern(PatternInterface.Invoke) as IInvokeProvider;
+                invprovide.Invoke();
+            }
+
+            foreach (var awesomeCard in carditems)
+            {
+                _acm.HandleUnSelection(awesomeCard); //complete and return to idle state
+                
+            }
+
+            TimerStartBtn.Visibility = Visibility.Visible;
+            TimerStopBtn.Visibility = Visibility.Hidden;
+        }
+
+        private void TimerStartBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (ToolBox.SelectedCardCollection.Count == 0)
+                return;
+
+            var carditems = new List<AwesomeCard>();
+            foreach (var card in ToolBox.SelectedCardCollection.Select(item => item.Value))
+            {
+                carditems.Add(card);
+                var peer = new ButtonAutomationPeer(card.PlayButton);
+                var invprovide = peer.GetPattern(PatternInterface.Invoke) as IInvokeProvider;
+                invprovide.Invoke();
+            }
+
+            foreach (var awesomeCard in carditems)
+            {
+                _acm.HandleUnSelection(awesomeCard); //complete and return to idle state
+
+            }
+
+            TimerStartBtn.Visibility = Visibility.Hidden;
+            TimerStopBtn.Visibility = Visibility.Visible;
+        }
+
+
+        private void RemoveCard_Click(object sender, RoutedEventArgs e)
+        {
+            var deletedCards = new List<string>();
+            foreach (var card in ToolBox.SelectedCardCollection.Select(item => item.Value))
+            {
+                card.Timer.Stop(); //stop background timer before removing card
+                deletedCards.Add(card._filename);
+                StackMain.Children.Remove(card);
+            }
+
+            foreach (var deletedCard in deletedCards.Where(deletedCard => ToolBox.SelectedCardCollection.ContainsKey(deletedCard)))
+            {
+                ToolBox.SelectedCardCollection.Remove(deletedCard);
+                ToolBox.CardCollection.Remove(deletedCard);
+            }
+
+        }
+
+        private void DeleteCard_Click(object sender, RoutedEventArgs e)
+        {
+            var deletedCards = new List<string>();
+            foreach (var card in ToolBox.SelectedCardCollection.Select(item => item.Value))
+            {
+                deletedCards.Add(card._filename);
+                new DeletionMechanism(card._assocFilePath, card.CardProperties.FileType);
+            }
+
+            foreach (var deletedCard in deletedCards.Where(deletedCard => ToolBox.SelectedCardCollection.ContainsKey(deletedCard)))
+            {
+                ToolBox.SelectedCardCollection.Remove(deletedCard);
             }
         }
 
-        #region Redundant code
+        private void SelectBtn_Click(object sender, RoutedEventArgs e)
+        {   
+            SetViewState(ViewState.Main);
+            if (ToolBox.CardCollection.Count <= 0) return;
+            foreach (var card in ToolBox.CardCollection.Select(item => item.Value))
+            {
+                if (!ToolBox.SelectedCardCollection.ContainsKey(card._filename))
+                    ToolBox.SelectedCardCollection.Add(card._filename, card);
 
-        //private bool _scroll = true;
-        //private void MainScroller_ScrollChanged(object sender, ScrollChangedEventArgs e)
-        //{
-        //    //if (e.ExtentHeight == 0)
-        //    //{
-        //    //    if (MainScroller.VerticalOffset == MainScroller.ScrollableHeight)
-        //    //    {
-        //    //        _scroll = true;
-        //    //    }
-        //    //    else
-        //    //    {
-        //    //        _scroll = false;
-        //    //    }
-        //    //}
+                _acm.HandleSelection(card);
+            }
 
-        //    //if (_scroll && e.ExtentHeight != 0)
-        //    //{
-        //    //    MainScroller.ScrollToVerticalOffset(MainScroller.ExtentHeight);
-        //    //}
-        //}
+            Btnselect.Visibility = Visibility.Collapsed;
+            BtnUnselect.Visibility = Visibility.Visible;
+        }
 
-        #endregion
+        private void UnSelectBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var cards = new List<AwesomeCard>();
+            foreach (var card in ToolBox.SelectedCardCollection.Select(item => item.Value))
+            {
+                if (!ToolBox.SelectedCardCollection.ContainsKey(card._filename))
+                    ToolBox.SelectedCardCollection.Remove(card._filename);
 
+                cards.Add(card);   
+            }
+
+            foreach (var awesomeCard in cards)
+            {
+                _acm.HandleUnSelection(awesomeCard);
+            }
+
+
+            Btnselect.Visibility = Visibility.Visible;
+            BtnUnselect.Visibility = Visibility.Collapsed;
+        }
     }
 }
