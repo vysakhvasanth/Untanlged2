@@ -21,7 +21,6 @@ namespace Untangled
         public static string Nofolderset = "Point me to a folder human!";
         public static string Nofilestowatch = "Waiting for omnoms!";
         public static readonly Dictionary<string, AwesomeCard> CardCollection = new Dictionary<string, AwesomeCard>();
-
         public static ObservableDict<string, AwesomeCard> SelectedCardCollection = new ObservableDict<string, AwesomeCard>();
 
         public static void Serialize(ConfigurationLoader configuration, string fileName)

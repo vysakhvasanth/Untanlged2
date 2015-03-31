@@ -4,7 +4,9 @@
         xmlns:cc="clr-namespace:CardControlLibrary;assembly=CardControlLibrary"
         Title="Untangled" Height="575" Width="571" Background="Transparent" WindowStartupLocation="Manual"  
         MouseDown="UntangledWnd_MouseDown" ScrollViewer.CanContentScroll="True" AllowsTransparency="True" 
-        WindowStyle="None" WindowState="Minimized" Loaded="UntangledWindow_Loaded" Closing="UntangledWindow_Closing" Deactivated="UntangledWindow_Deactivated" Activated="UntangledWindow_Activated" ResizeMode="NoResize" Icon="Images/icon.ico">
+        WindowStyle="None" WindowState="Minimized" Loaded="UntangledWindow_Loaded" 
+        Closing="UntangledWindow_Closing" Deactivated="UntangledWindow_Deactivated" 
+        Activated="UntangledWindow_Activated" ResizeMode="NoResize" Icon="untangledicon.ico">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -238,13 +240,13 @@
                     <ColumnDefinition Width="22"></ColumnDefinition>
                     <ColumnDefinition Width="3"></ColumnDefinition>
                     <ColumnDefinition Width="22"></ColumnDefinition>
+                    <ColumnDefinition Width="3"></ColumnDefinition>
+                    <ColumnDefinition Width="22"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="TimerStopBtn" Grid.Column="1"  Template="{StaticResource TimerStop}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="16"  Click="TimerStopBtn_Click" ToolTip="Stop selected card timer(s)"></Button>
-                <Button x:Name="TimerStartBtn" Grid.Column="1"  Template="{StaticResource TimerStart}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="16"  Click="TimerStartBtn_Click" ToolTip="Start selected card timer(s)" Visibility="Collapsed"></Button>
-                <Separator Grid.Column="2" VerticalAlignment="Center" HorizontalContentAlignment="Right" Width="15"  Background="#5e5e5e" BorderBrush="#bbbbbb" BorderThickness="1" Style="{StaticResource VerticalSeparatorStyle}" />
-                <Button x:Name="CancelSelectionBtn" Grid.Column="3" Template="{StaticResource RemoveButton}" Height="15"  HorizontalAlignment="Center" Width="15" Click="RemoveCard_Click" ToolTip="Remove selected card(s)"/>
-                <Separator Grid.Column="4" VerticalAlignment="Center" HorizontalContentAlignment="Right" Width="15"  Background="#5e5e5e" BorderBrush="#bbbbbb" BorderThickness="1" Style="{StaticResource VerticalSeparatorStyle}" />
-                <Button x:Name="DeleteBtn" Grid.Column="5"  Template="{StaticResource Delete}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="16"  Click="DeleteCard_Click" ToolTip="Delete selected item(s)"></Button>
+                <Button x:Name="TimerStopBtn" Grid.Column="1"  Template="{StaticResource TimerStop}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="15"  Click="TimerStopBtn_Click" ToolTip="Stop selected card timer(s)"></Button>
+                <Button x:Name="TimerStartBtn" Grid.Column="3"  Template="{StaticResource TimerStart}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="17"  Click="TimerStartBtn_Click" ToolTip="Start selected card timer(s)" Visibility="Visible"></Button>
+                <Button x:Name="CancelSelectionBtn" Grid.Column="5" Template="{StaticResource RemoveButton}" Height="17"  HorizontalAlignment="Center" Click="RemoveCard_Click" ToolTip="Remove selected card(s)"/>
+                <Button x:Name="DeleteBtn" Grid.Column="7"  Template="{StaticResource Delete}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="17"  Click="DeleteCard_Click" ToolTip="Delete selected file(s)"></Button>
             </Grid>
         </Grid>
         <!-- End of Main grid-->

@@ -10,6 +10,7 @@ using System.Windows.Automation.Provider;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
+using System.Windows.Media.Imaging;
 using CardControlLibrary;
 using MessageBox = System.Windows.MessageBox;
 using Application = System.Windows.Application;
@@ -45,7 +46,11 @@ namespace Untangled
             _applicationDirectory = Directory.GetCurrentDirectory(); //get current directory
             LoadtoTray();
             LoadConfiguration(Path.Combine(_applicationDirectory, Configfile));
-            this.DataContext = GeneralSettings;
+            DataContext = GeneralSettings;
+
+            //set Icon
+            var iconUri = new Uri("icon.ico", UriKind.RelativeOrAbsolute);
+            Icon = BitmapFrame.Create(iconUri);
         }
 
         /// <summary>
@@ -472,9 +477,9 @@ namespace Untangled
             foreach (var card in ToolBox.SelectedCardCollection.Select(item => item.Value))
             {
                carditems.Add(card);
-                var peer = new ButtonAutomationPeer(card.PauseButton);
-                var invprovide = peer.GetPattern(PatternInterface.Invoke) as IInvokeProvider;
-                invprovide.Invoke();
+               var peer = new ButtonAutomationPeer(card.PauseButton);
+               var invprovide = peer.GetPattern(PatternInterface.Invoke) as IInvokeProvider;
+               invprovide.Invoke();
             }
 
             foreach (var awesomeCard in carditems)
@@ -482,9 +487,6 @@ namespace Untangled
                 _acm.HandleUnSelection(awesomeCard); //complete and return to idle state
                 
             }
-
-            TimerStartBtn.Visibility = Visibility.Visible;
-            TimerStopBtn.Visibility = Visibility.Hidden;
         }
 
         private void TimerStartBtn_Click(object sender, RoutedEventArgs e)
@@ -506,9 +508,6 @@ namespace Untangled
                 _acm.HandleUnSelection(awesomeCard); //complete and return to idle state
 
             }
-
-            TimerStartBtn.Visibility = Visibility.Hidden;
-            TimerStopBtn.Visibility = Visibility.Visible;
         }
 
 
@@ -527,6 +526,8 @@ namespace Untangled
                 ToolBox.SelectedCardCollection.Remove(deletedCard);
                 ToolBox.CardCollection.Remove(deletedCard);
             }
+
+            GeneralSettings.ItemsCount = StackMain.Children.Count;
 
         }
 
@@ -576,7 +577,6 @@ namespace Untangled
             {
                 _acm.HandleUnSelection(awesomeCard);
             }
-
 
             Btnselect.Visibility = Visibility.Visible;
             BtnUnselect.Visibility = Visibility.Collapsed;

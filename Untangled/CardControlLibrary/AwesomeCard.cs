@@ -22,7 +22,6 @@ namespace CardControlLibrary
         public FileType _fileType { get; set; }
         public event EventHandler TimerFinished;
         public event EventHandler Selected;
-        public event EventHandler ControlStateChanged;
         public ControlState controlState = ControlState.Pause;
        
 
@@ -164,12 +163,6 @@ namespace CardControlLibrary
             CurrentDisposibleState = Disposible.NoMan;
             _unqId = Guid.NewGuid();
             _fileType = FileType.File;
-            this.ControlStateChanged += AwesomeCard_ControlStateChanged;
-        }
-
-        void AwesomeCard_ControlStateChanged(object sender, EventArgs e)
-        {
-            
         }
 
         public override void OnApplyTemplate()

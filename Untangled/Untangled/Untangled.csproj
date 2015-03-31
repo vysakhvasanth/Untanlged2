@@ -34,6 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Accessibility" />
     <Reference Include="PresentationUI, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
@@ -191,9 +194,6 @@
     <Resource Include="Images\stop_clock.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\start_clock.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\delete_card.png" />
   </ItemGroup>
   <ItemGroup>
@@ -209,7 +209,6 @@
     <Resource Include="Images\remove_card_hover.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\start_clock_hover.png" />
     <Resource Include="Images\stop_clock_hover.png" />
   </ItemGroup>
   <ItemGroup>
@@ -223,6 +222,34 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\cancel.png" />
+    <Resource Include="Images\cancel_hover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="untangledicon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\sto.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\sto_hover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\rem.png" />
+    <Resource Include="Images\rem_hover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\del.png" />
+    <Resource Include="Images\del_hover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\sta.png" />
+    <Resource Include="Images\sta_hover.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

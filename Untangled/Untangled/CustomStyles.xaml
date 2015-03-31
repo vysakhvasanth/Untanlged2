@@ -617,8 +617,8 @@
 
     <ControlTemplate x:Key="RemoveButton" TargetType="{x:Type Button}">
         <Grid>
-            <Image x:Name="Normal" Source="Images/remove_card.png"/>
-            <Image x:Name="Hover" Source="Images/remove_card_hover.png" Visibility="Hidden"/>
+            <Image x:Name="Normal" Source="Images/rem.png"/>
+            <Image x:Name="Hover" Source="Images/rem_hover.png" Visibility="Hidden"/>
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
@@ -635,8 +635,8 @@
 
     <ControlTemplate x:Key="TimerStop" TargetType="{x:Type Button}">
         <Grid>
-            <Image x:Name="Normal" Source="Images/stop_clock.png"/>
-            <Image x:Name="Hover" Source="Images/stop_clock_hover.png" Visibility="Hidden"/>
+            <Image x:Name="Normal" Source="Images/sto.png"/>
+            <Image x:Name="Hover" Source="Images/sto_hover.png" Visibility="Hidden"/>
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
@@ -653,8 +653,8 @@
 
     <ControlTemplate x:Key="TimerStart" TargetType="{x:Type Button}">
         <Grid>
-            <Image x:Name="Normal" Source="Images/start_clock.png"/>
-            <Image x:Name="Hover" Source="Images/start_clock_hover.png" Visibility="Hidden"/>
+            <Image x:Name="Normal" Source="Images/sta.png"/>
+            <Image x:Name="Hover" Source="Images/sta_hover.png" Visibility="Hidden"/>
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
@@ -671,8 +671,8 @@
 
     <ControlTemplate x:Key="Delete" TargetType="{x:Type Button}">
         <Grid>
-            <Image x:Name="Normal" Source="Images/delete_card.png"/>
-            <Image x:Name="Hover" Source="Images/delete_card_hover.png" Visibility="Hidden"/>
+            <Image x:Name="Normal" Source="Images/del.png"/>
+            <Image x:Name="Hover" Source="Images/del_hover.png" Visibility="Hidden"/>
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
@@ -681,32 +681,6 @@
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
-
-
-
-
-    <!--
-        Side Bar: Timer change Button
-    -->
-
-    <ControlTemplate x:Key="IncreaseTimerSpeed" TargetType="{x:Type Button}">
-        <Grid>
-            <Image x:Name="Normal" Source="Images/quick.png"/>
-            <Image x:Name="Hover" Source="Images/quick.png" Visibility="Hidden"/>
-            <Image x:Name="Pressed" Source="Images/quick.png" Visibility="Hidden"/>
-        </Grid>
-        <ControlTemplate.Triggers>
-            <Trigger Property="IsPressed" Value="True">
-                <Setter TargetName="Normal" Property="Visibility" Value="Hidden"/>
-                <Setter TargetName="Pressed" Property="Visibility" Value="Visible"/>
-            </Trigger>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter TargetName="Normal" Property="Visibility" Value="Hidden"/>
-                <Setter TargetName="Hover" Property="Visibility" Value="Visible"/>
-            </Trigger>
-        </ControlTemplate.Triggers>
-    </ControlTemplate>
-    
     
     
 
